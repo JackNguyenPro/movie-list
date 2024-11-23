@@ -1,0 +1,59 @@
+name: Backend Continuous Integration
+on:
+  workflow_dispatch:
+  # Automatic trigger on pull request events targeting the main branch
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the code from the repository.
+      - uses: actions/checkout@v3
+
+      # Set up a Node.js environment using the specified node version.
+      - uses: actions/setup-node@v3
+        with:
+          node-version: latest
+
+      # Install the dependencies.
+      - run: cd backend && npm ci
+
+      # Run the linter.
+      - run: cd backend && npm run lint
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the code from the repository.
+      - uses: actions/checkout@v3
+
+      # Set up a Node.js environment using the specified node version.
+      - uses: actions/setup-node@v3
+        with:
+          node-version: latest
+
+      # Install the dependencies.
+      - run: cd backend && npm ci
+
+      # Run the test.
+      - run: cd backend && npm run test
+
+  build:
+    needs: [lint]
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the code from the repository.
+      - uses: actions/checkout@v3
+
+      # Set up a Node.js environment using the specified node version.
+      - uses: actions/setup-node@v3
+        with:
+          node-version: latest
+
+      # Install the dependencies.
+      - run: cd backend && npm ci
+
+      # Build docker
+      - run: cd backend && npm run test
