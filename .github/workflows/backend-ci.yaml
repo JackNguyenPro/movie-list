@@ -51,13 +51,5 @@ jobs:
       # Check out the code from the repository.
       - uses: actions/checkout@v3
 
-      # Set up a Node.js environment using the specified node version.
-      - uses: actions/setup-node@v3
-        with:
-          node-version: latest
-
-      # Install the dependencies.
-      - run: cd backend && npm ci
-
-      # Build docker
+      # Build docker image
       - run: cd backend && docker build --tag mp-backend:latest .
