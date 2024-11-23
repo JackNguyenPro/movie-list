@@ -45,7 +45,7 @@ jobs:
       - run: cd backend && pipenv install pytest && pipenv run test
 
   build:
-    needs: [lint]
+    needs: [lint, test]
     runs-on: ubuntu-latest
     steps:
       # Check out the code from the repository.
