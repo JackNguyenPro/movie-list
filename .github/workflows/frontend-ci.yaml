@@ -60,7 +60,5 @@ jobs:
           cache-dependency-path: starter/frontend/package-lock.json
 
       # Build and run Docker
-      - run: |
-        cd frontend
-        docker build --build-arg=REACT_APP_MOVIE_API_URL=http://localhost:5000 --tag=mp-frontend:latest .
-        docker run --name mp-frontend -p 3000:3000 -d mp-frontend
+      - run: cd frontend && docker build --build-arg=REACT_APP_MOVIE_API_URL=http://localhost:5000 --tag=mp-frontend:latest .
+      - run: docker run --name mp-frontend -p 3000:3000 -d mp-frontend
