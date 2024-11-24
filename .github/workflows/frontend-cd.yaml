@@ -79,7 +79,7 @@ jobs:
           docker push $REGISTRY/$REPO_NAME:$IMAGE_TAG
 
       - name: Configure kubeconfig
-        run:
+        run: |
         aws eks update-kubeconfig --name cluster --region us-east-1
       
       - name: Deploy docker image by kustomize
