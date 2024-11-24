@@ -79,10 +79,10 @@ jobs:
 
       - name: Configure kubeconfig
         run: |
-        aws eks update-kubeconfig --name cluster --region us-east-1
+          aws eks update-kubeconfig --name cluster --region us-east-1
 
       - name: Deploy docker image by kustomize
         working-directory: frontend/k8s
         run: |
-            kustomize edit set image frontend=$REGISTRY/$REPO_NAME:$IMAGE_TAG
-            kustomize build | kubectl apply -f -
+          kustomize edit set image frontend=$REGISTRY/$REPO_NAME:$IMAGE_TAG
+          kustomize build | kubectl apply -f -
