@@ -23,13 +23,13 @@ jobs:
         uses: hashicorp/setup-terraform@v2
 
       - name: Terraform Initialize
-        run: terraform init
+        run: cd setup/terraform && terraform init
 
       - name: Terraform Validate
-        run: terraform validate
+        run: cd setup/terraform && terraform validate
 
       - name: Terraform Plan
-        run: terraform plan
+        run: cd setup/terraform && terraform plan
         continue-on-error: true
 
       - name: Terraform Apply
