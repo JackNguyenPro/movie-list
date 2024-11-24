@@ -16,7 +16,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          # aws-session-token: ${{secrets.AWS_SESSION_TOKEN}}
+          aws-session-token: ${{secrets.AWS_SESSION_TOKEN}}
           aws-region: us-east-1
 
       - name: Setup Terraform
@@ -34,9 +34,9 @@ jobs:
         run: cd setup/terraform && terraform plan
         continue-on-error: true
 
-      - name: Terraform Apply
-        # if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: cd setup/terraform && terraform apply -auto-approve
+      # - name: Terraform Apply
+      #   # if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      #   run: cd setup/terraform && terraform apply -auto-approve
 
-      # - name: Terraform Destroy
-      #   run: terraform plan -destroy
+      - name: Terraform Destroy
+        run: cd setup/terraform && terraform plan -destroy
